@@ -22,7 +22,7 @@ C:\Program Files\Viktor\Viktor for <application> <software package> <version>
 
 4. For the credentials follow the steps that are shown in the picture below:
 
-![My Image](Images_readMe/Credentials.png)
+![My Image](Images_readme/Credentials.png)
 $\qquad$ 4.1 Go to workers tab 
 
 $\qquad$ 4.2 Press the button "Create worker" (top right)
@@ -32,7 +32,7 @@ $\qquad$ 4.3 Fill in the description, allocation to specific and use your worksp
 $\qquad$ 4.4 Press on create, you will get the following pop up(see figure below). Paste the credential code and placed in it in the install wizard immediately. Viktor will not preserve this data for security reasons.
 
 
-![My Image](Images_readMe/Credentials_popup.png)
+![My Image](Images_readme/Credentials_popup.png)
 
 5. Next step is to install formit [Download link](https://formit.autodesk.com/)
 
@@ -72,5 +72,5 @@ For more information about the Dynamo CLI is referred to: https://github.com/Dyn
 
 7. Run the **viktor-worker-gneric** file as an administrator. You should see a green bullet in the top right corner, see figure below. This means the worker succesfoll installed.
 
-![My Image](Images_readMe/Connection.png)
+![My Image](Images_readme/Connection.png)
 
