@@ -7,3 +7,70 @@ In this tutorial, we will learn how to seamlessly integrate a dynamo model into 
 To start, the user provides the necessary parameters for the dynamo model within the Viktor application. The Viktor worker then computes the dynamo model using the command-line interface included within Dynamo Sandbox. The geometry of the model is generated using either Autodesk Revit or FormIt. The geometry JSON is then converted to a mesh, which is rendered and visualized in Viktor.
 
 In addition to creating the app, this tutorial will also cover common troubleshooting issues that may arise during the integration process. Furthermore, we will discuss how to install the worker, which is required to run the analysis.
+
+## Setting up worker 
+A worker is a program that connects VIKTOR with third-party software to execute tasks and retrieve results through the platform.  The worker communicates with the VIKTOR cloud via an encrypted TCP connection, eliminating the need to open public ports on the network. For Dynamo integration, the generic worker must be installed. Follow the steps below:
+
+1. Select the generic worker. The installer starts an installation wizard from which the worker can be configured. Administrator rights on the machine are required to perform the installation.
+
+2. Specification of the installation directory. The standard directory that is used for the installation is: C:\Program Files\Viktor\Viktor for 
+
+```
+C:\Program Files\Viktor\Viktor for <application> <software package> <version>
+```
+3. Configuration of the worker. Using the installation wizard you will be asked to fill the required information step-by-step. During this installation wizard you are asked for your  credentials 
+
+4. For the credentials follow the steps that are shown in the picture below:
+
+![My Image](Images_readMe/Credentials.png)
+$\qquad$ 4.1 Go to workers tab 
+
+$\qquad$ 4.2 Press the button "Create worker" (top right)
+
+$\qquad$ 4.3 Fill in the description, allocation to specific and use your workspace  
+
+$\qquad$ 4.4 Press on create, you will get the following pop up(see figure below). Paste the credential code and placed in it in the install wizard immediately. Viktor will not preserve this data for security reasons.
+
+
+![My Image](Images_readMe/Credentials_popup.png)
+
+5. Next step is to install formit [Download link](https://formit.autodesk.com/)
+
+6. Open the **config.yaml** inside the same folder as the generic worker executive(see step 2)
+
+Delete everything inside the file. The config file should contain the path to the DynamoSandbox executable, that is automatically installed with Formit
+
+Additionally, the file should contain the following arguments:
+
+- Dynamo script, -o (open)
+- Geometry file, -v (output)
+- Path to local installation of Autodesk FormIt or Revit, -gp (geometry path)
+- Json file, -g (geometry file)
+
+The temporary dynamo script, geometry file and json file are created within the worker folder.
+
+An example of the code for the file named  **config.yaml** is shown below:
+
+```
+<pre><code>executables:
+  dynamo:
+    path: 'C:\Program Files\Autodesk\FormIt\DynamoSandbox\DynamoWPFCLI.exe'
+    arguments:
+    - '-o'
+    - 'input.dyn'
+    - '-v'
+    - 'output.xml'
+    - '-gp'
+    - 'C:\Program Files\Autodesk\FormIt' 
+    - '-g'
+    - 'geometry.json'
+maxParallelProcesses: 1 # must be one, please do not change
+</code></pre>
+```
+
+For more information about the Dynamo CLI is referred to: https://github.com/DynamoDS/Dynamo/wiki/Dynamo-Command-Line-Interface
+
+7. Run the **viktor-worker-gneric** file as an administrator. You should see a green bullet in the top right corner, see figure below. This means the worker succesfoll installed.
+
+![My Image](Images_readMe/Connection.png)
+
